@@ -1,0 +1,63 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# PostgreSQL
+# (Usually DB is not stored in repo, but ignore dumps if created)
+*.sql
+*.dump
+
+# Environment variables
+.env
+.env.*
+*.env
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# Static & media (if generated)
+staticfiles/
+media/
+
+# Migrations (optional — keep if you want them versioned)
+# */migrations/*
+# !*/migrations/__init__.py
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Unit test / coverage reports
+.coverage
+coverage.xml
+htmlcov/
+.pytest_cache/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# mypy / type check
+.mypy_cache/
+.dmypy.json
+
+# pycharm
+*.iml
