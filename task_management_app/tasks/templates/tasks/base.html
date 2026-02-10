@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="{% url 'task_list' %}" style="font-size: 1.3em; font-weight: bold;">📋 Task Manager</a>
+            {% if user.is_authenticated %}
+                <span style="float: right;">
+                    <span>Welcome, <strong>{{ user.username }}</strong>!</span>
+                    <a href="{% url 'logout' %}">Logout</a>
+                </span>
+            {% else %}
+                <span style="float: right;">
+                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'register' %}">Register</a>
+                </span>
+            {% endif %}
+        </div>
+    </nav>
+    
+    <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="messages">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
