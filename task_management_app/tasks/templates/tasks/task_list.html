@@ -1,33 +1,58 @@
 {% extends 'tasks/base.html' %}
 
 {% block content %}
-<h2>My Tasks</h2>
-<a href="{% url 'task_create' %}" class="btn">Create New Task</a>
+<div class="page-heading">
+    <span>📝 My Tasks</span>
+    <a href="{% url 'task_create' %}" class="btn">+ New Task</a>
+</div>
 
-<h3>Pending Tasks</h3>
+<p class="section-title">⏳ Pending</p>
 {% for task in tasks %}
     {% if task.status == 'pending' %}
     <div class="task-card priority-{{ task.priority }}">
         <h3>{{ task.title }}</h3>
-        <p>{{ task.description|truncatewords:20 }}</p>
-        <p><strong>Priority:</strong> {{ task.get_priority_display }} | <strong>Due:</strong> {{ task.due_date }}</p>
-        <a href="{% url 'task_detail' task.pk %}">View</a> |
-        <a href="{% url 'task_update' task.pk %}">Edit</a> |
-        <a href="{% url 'task_delete' task.pk %}">Delete</a>
+        {% if task.description %}
+            <p>{{ task.description|truncatewords:20 }}</p>
+        {% endif %}
+        <div class="task-meta">
+            <span class="badge badge-pending">Pending</span>
+            <span class="badge badge-{{ task.priority }}">{{ task.get_priority_display }} Priority</span>
+            <span style="font-size:0.85rem; color:#777;">📅 Due: {{ task.due_date }}</span>
+        </div>
+        <div class="task-actions">
+            <a href="{% url 'task_detail' task.pk %}" class="btn btn-secondary">View</a>
+            <a href="{% url 'task_update' task.pk %}" class="btn">Edit</a>
+            <a href="{% url 'task_delete' task.pk %}" class="btn btn-delete">Delete</a>
+        </div>
     </div>
     {% endif %}
+{% empty %}
 {% endfor %}
 
-<h3>Completed Tasks</h3>
+{% with pending_count=tasks|length %}
+    {% if pending_count == 0 %}
+        <div class="empty-state">No pending tasks 🎉</div>
+    {% endif %}
+{% endwith %}
+
+<p class="section-title">✅ Completed</p>
 {% for task in tasks %}
     {% if task.status == 'completed' %}
     <div class="task-card priority-{{ task.priority }}">
         <h3>{{ task.title }}</h3>
-        <p>{{ task.description|truncatewords:20 }}</p>
-        <p><strong>Priority:</strong> {{ task.get_priority_display }} | <strong>Due:</strong> {{ task.due_date }}</p>
-        <a href="{% url 'task_detail' task.pk %}">View</a> |
-        <a href="{% url 'task_update' task.pk %}">Edit</a> |
-        <a href="{% url 'task_delete' task.pk %}">Delete</a>
+        {% if task.description %}
+            <p>{{ task.description|truncatewords:20 }}</p>
+        {% endif %}
+        <div class="task-meta">
+            <span class="badge badge-completed">Completed</span>
+            <span class="badge badge-{{ task.priority }}">{{ task.get_priority_display }} Priority</span>
+            <span style="font-size:0.85rem; color:#777;">📅 Due: {{ task.due_date }}</span>
+        </div>
+        <div class="task-actions">
+            <a href="{% url 'task_detail' task.pk %}" class="btn btn-secondary">View</a>
+            <a href="{% url 'task_update' task.pk %}" class="btn">Edit</a>
+            <a href="{% url 'task_delete' task.pk %}" class="btn btn-delete">Delete</a>
+        </div>
     </div>
     {% endif %}
 {% endfor %}
