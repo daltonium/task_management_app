@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -76,11 +77,11 @@ WSGI_APPLICATION = 'task_management_app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'task_manager_db',       # Database name you created
-        'USER': 'task_manager_user',     # User you created
-        'PASSWORD': '2006',              # Password you set
-        'HOST': 'localhost',             # or '127.0.0.1'
-        'PORT': '5432',                  # Default PostgreSQL port
+        'NAME':     os.environ.get('DB_NAME',     'task_manager_db'),
+        'USER':     os.environ.get('DB_USER',     'task_manager_user'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'yourpassword'),
+        'HOST':     os.environ.get('DB_HOST',     'localhost'),
+        'PORT':     os.environ.get('DB_PORT',     '5432'),
     }
 }
 
