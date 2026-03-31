@@ -2,12 +2,14 @@
 
 {% block content %}
 <div class="auth-card">
-    <h2>✨ Create Account</h2>
+    <h2>Create Account</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <div style="margin-top: 24px;">
-            <button type="submit" class="btn" style="width:100%;">Register</button>
+        <div style="margin-top: 2rem;">
+            <button type="submit" class="btn" style="width:100%; justify-content:center;">
+                Register
+            </button>
         </div>
     </form>
     <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>

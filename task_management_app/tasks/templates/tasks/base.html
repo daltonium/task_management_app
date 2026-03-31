@@ -5,16 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Manager</title>
+    <!-- Fontshare: Cabinet Grotesk (display) + Satoshi (body) -->
+    <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
 
 <nav>
     <div class="nav-inner">
-        <a href="{% url 'task_list' %}" class="brand">📋 Task Manager</a>
+        <a href="{% url 'task_list' %}" class="brand">Task Manager</a>
         <div class="nav-links">
             {% if user.is_authenticated %}
-                <span class="welcome">👋 {{ user.username }}</span>
+                <span class="welcome">{{ user.username }}</span>
                 <a href="{% url 'logout' %}">Logout</a>
             {% else %}
                 <a href="{% url 'login' %}">Login</a>

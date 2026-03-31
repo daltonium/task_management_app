@@ -2,11 +2,12 @@
 
 {% block content %}
 <div class="page-heading">
-    <span>📝 My Tasks</span>
+    <span>My Tasks</span>
     <a href="{% url 'task_create' %}" class="btn">+ New Task</a>
 </div>
 
-<p class="section-title">⏳ Pending</p>
+<p class="section-title">Pending</p>
+
 {% for task in tasks %}
     {% if task.status == 'pending' %}
     <div class="task-card priority-{{ task.priority }}">
@@ -16,8 +17,8 @@
         {% endif %}
         <div class="task-meta">
             <span class="badge badge-pending">Pending</span>
-            <span class="badge badge-{{ task.priority }}">{{ task.get_priority_display }} Priority</span>
-            <span style="font-size:0.85rem; color:#777;">📅 Due: {{ task.due_date }}</span>
+            <span class="badge badge-{{ task.priority }}">{{ task.get_priority_display }}</span>
+            <span class="due-label">Due: {{ task.due_date }}</span>
         </div>
         <div class="task-actions">
             <a href="{% url 'task_detail' task.pk %}" class="btn btn-secondary">View</a>
@@ -31,11 +32,14 @@
 
 {% with pending_count=tasks|length %}
     {% if pending_count == 0 %}
-        <div class="empty-state">No pending tasks 🎉</div>
+        <div class="empty-state">
+            <p>No pending tasks — you're all caught up!</p>
+        </div>
     {% endif %}
 {% endwith %}
 
-<p class="section-title">✅ Completed</p>
+<p class="section-title">Completed</p>
+
 {% for task in tasks %}
     {% if task.status == 'completed' %}
     <div class="task-card priority-{{ task.priority }}">
@@ -45,8 +49,8 @@
         {% endif %}
         <div class="task-meta">
             <span class="badge badge-completed">Completed</span>
-            <span class="badge badge-{{ task.priority }}">{{ task.get_priority_display }} Priority</span>
-            <span style="font-size:0.85rem; color:#777;">📅 Due: {{ task.due_date }}</span>
+            <span class="badge badge-{{ task.priority }}">{{ task.get_priority_display }}</span>
+            <span class="due-label">Due: {{ task.due_date }}</span>
         </div>
         <div class="task-actions">
             <a href="{% url 'task_detail' task.pk %}" class="btn btn-secondary">View</a>

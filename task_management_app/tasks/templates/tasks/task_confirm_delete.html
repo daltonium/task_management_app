@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="confirm-card">
-    <h2>🗑️ Delete Task</h2>
+    <h2>Delete Task</h2>
     <p>Are you sure you want to delete <strong>"{{ task.title }}"</strong>?<br>This action cannot be undone.</p>
     <form method="post">
         {% csrf_token %}
