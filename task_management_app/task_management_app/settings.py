@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -79,7 +80,7 @@ DATABASES = {
         'NAME': 'task_manager_db',       # Database name you created
         'USER': 'task_manager_user',     # User you created
         'PASSWORD': '2006',              # Password you set
-        'HOST': 'localhost',             # or '127.0.0.1'
+        'HOST': 'db',                    # docker effect
         'PORT': '5432',                  # Default PostgreSQL port
     }
 }
@@ -127,7 +128,8 @@ LOGIN_REDIRECT_URL = 'task_list'
 
 import os
 
-STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
